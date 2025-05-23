@@ -1,24 +1,103 @@
-// ... (ส่วนที่ 1: questions array และตัวแปรหลัก เหมือนเดิม) ...
+// --- ส่วนที่ 1: กำหนดข้อมูลเกมและตัวแปรหลัก ---
+const questions = [
+    // --- คำถามระดับง่าย (Easy) ---
+    { en: "Hello", jp: "こんにちは", th: "สวัสดี", options_th: ["ลาก่อน", "ขอบคุณ", "สวัสดี", "ขอโทษ"], correct_th: "สวัสดี", difficulty: "easy" },
+    { en: "Thank you", jp: "ありがとう", th: "ขอบคุณ", options_th: ["ขอโทษ", "โปรด", "ขอบคุณ", "ใช่"], correct_th: "ขอบคุณ", difficulty: "easy" },
+    { en: "Goodbye", jp: "さようなら", th: "ลาก่อน", options_th: ["สวัสดี", "ลาก่อน", "ขอโทษนะครับ/คะ", "ไม่"], correct_th: "ลาก่อน", difficulty: "easy" },
+    { en: "Water", jp: "水", th: "น้ำ", options_th: ["อาหาร", "น้ำ", "ไฟ", "อากาศ"], correct_th: "น้ำ", difficulty: "easy" },
+    { en: "Cat", jp: "猫 (ねこ)", th: "แมว", options_th: ["สุนัข", "แมว", "นก", "ปลา"], correct_th: "แมว", difficulty: "easy" },
 
-// เพิ่มตัวแปรและอ้างอิงสำหรับจับเวลา
+    // --- คำถามระดับปานกลาง (Medium) ---
+    { en: "Elephant", jp: "象 (ぞう)", th: "ช้าง", options_th: ["สุนัข", "แมว", "ช้าง", "นก"], correct_th: "ช้าง", difficulty: "medium" },
+    { en: "Beautiful", jp: "美しい (うつくしい)", th: "สวยงาม", options_th: ["น่าเกลียด", "รวดเร็ว", "สวยงาม", "ใหญ่"], correct_th: "สวยงาม", difficulty: "medium" },
+    { en: "Library", jp: "図書館 (としょかん)", th: "ห้องสมุด", options_th: ["โรงเรียน", "บ้าน", "ร้านค้า", "ห้องสมุด"], correct_th: "ห้องสมุด", difficulty: "medium" },
+    { en: "Hospital", jp: "病院 (びょういん)", th: "โรงพยาบาล", options_th: ["โรงเรียน", "ธนาคาร", "โรงพยาบาล", "ร้านอาหาร"], correct_th: "โรงพยาบาล", difficulty: "medium" },
+    { en: "To eat", jp: "食べる (たべる)", th: "กิน", options_th: ["ดื่ม", "วิ่ง", "นอน", "กิน"], correct_th: "กิน", difficulty: "medium" },
+
+    // --- คำถามระดับยาก (Hard) ---
+    { en: "University", jp: "大学 (だいがく)", th: "มหาวิทยาลัย", options_th: ["โรงเรียน", "บ้าน", "ร้านค้า", "มหาวิทยาลัย"], correct_th: "มหาวิทยาลัย", difficulty: "hard" },
+    { en: "Transportation", jp: "交通機関 (こうつうきかん)", th: "การขนส่ง", options_th: ["การสื่อสาร", "การเดินทาง", "การขนส่ง", "การเกษตร"], correct_th: "การขนส่ง", difficulty: "hard" },
+    { en: "Approximately", jp: "およそ", th: "ประมาณ", options_th: ["แน่นอน", "อย่างแม่นยำ", "ประมาณ", "ทันที"], correct_th: "ประมาณ", difficulty: "hard" },
+    { en: "Independence", jp: "独立 (どくりつ)", th: "อิสรภาพ", options_th: ["ความร่วมมือ", "ความเป็นทาส", "อิสรภาพ", "ความขัดแย้ง"], correct_th: "อิสรภาพ", difficulty: "hard" },
+    { en: "Responsibility", jp: "責任 (せきにん)", th: "ความรับผิดชอบ", options_th: ["ความสุข", "ความประมาท", "ความรับผิดชอบ", "ความกล้าหาญ"], correct_th: "ความรับผิดชอบ", difficulty: "hard" }
+];
+
 const TIME_LIMIT_PER_QUESTION = 15; // จำกัดเวลาต่อคำถาม (วินาที)
-let timeLeft = TIME_LIMIT_PER_QUESTION;
+
+let currentQuestionIndex = 0;
+let correctScore = 0;
+let wrongScore = 0;
+let currentLanguage = 'en'; // 'en' สำหรับคำถามภาษาอังกฤษ, 'jp' สำหรับคำถามภาษาญี่ปุ่น
+let selectedDifficulty = 'easy'; // ระดับความยากเริ่มต้น
 let timerInterval;
+let timeLeft = TIME_LIMIT_PER_QUESTION;
+let currentQuestionSet = []; // ชุดคำถามที่ถูกกรองและสุ่มแล้วสำหรับรอบปัจจุบัน
 
 // --- ส่วนที่ 2: อ้างอิง Element ใน HTML ---
-// ... (อ้างอิง Element เดิม) ...
-
-// อ้างอิง Element ใหม่
 const startScreen = document.getElementById('start-screen');
+const gameScreen = document.getElementById('game-screen');
+const resultScreen = document.getElementById('result-screen');
+
+const langEnButton = document.getElementById('lang-en');
+const langJpButton = document.getElementById('lang-jp');
+const diffEasyBtn = document.getElementById('diff-easy');
+const diffMediumBtn = document.getElementById('diff-medium');
+const diffHardBtn = document.getElementById('diff-hard');
 const startGameButton = document.getElementById('start-game-button');
-const gameContainer = document.getElementById('game-container'); // ส่วนที่ครอบคลุม game-area และ score-area
+
 const timerText = document.getElementById('timer-text');
 const timeLeftSpan = document.getElementById('time-left');
+const questionText = document.getElementById('question-text');
+const optionsContainer = document.getElementById('options-container');
+const feedbackText = document.getElementById('feedback-text');
+const nextButton = document.getElementById('next-button');
+const correctScoreSpan = document.getElementById('correct-score');
+const wrongScoreSpan = document.getElementById('wrong-score');
+
+const finalCorrectScoreSpan = document.getElementById('final-correct-score');
+const finalWrongScoreSpan = document.getElementById('final-wrong-score');
+const finalMessageText = document.querySelector('.final-message');
+const playAgainButton = document.getElementById('play-again-button');
 
 
 // --- ส่วนที่ 3: ฟังก์ชันหลักของเกม ---
 
-// ... (shuffleArray ฟังก์ชันเหมือนเดิม) ...
+// ฟังก์ชันสำหรับสุ่มลำดับ Element ใน Array
+function shuffleArray(array) {
+    const newArray = [...array]; // สร้าง array ใหม่เพื่อไม่แก้ไข original array
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+}
+
+// ฟังก์ชันสำหรับสลับหน้าจอ
+function showScreen(screenId) {
+    const screens = [startScreen, gameScreen, resultScreen];
+    screens.forEach(screen => {
+        if (screen.id === screenId) {
+            screen.classList.remove('hidden');
+        } else {
+            screen.classList.add('hidden');
+        }
+    });
+}
+
+// ฟังก์ชันเตรียมเกม (เรียกเมื่อกดเริ่มเกม)
+function prepareGame() {
+    // กรองคำถามตามระดับความยากที่เลือก
+    const filteredQuestions = questions.filter(q => q.difficulty === selectedDifficulty);
+    currentQuestionSet = shuffleArray(filteredQuestions); // สุ่มคำถามสำหรับรอบเกมนี้
+
+    currentQuestionIndex = 0;
+    correctScore = 0;
+    wrongScore = 0;
+    updateScores(); // อัปเดตคะแนนเป็น 0
+    stopTimer(); // หยุด timer เก่า (ถ้ามี)
+    feedbackText.textContent = ''; // ล้างข้อความ Feedback
+    feedbackText.className = '';
+}
 
 // ฟังก์ชันสำหรับแสดงคำถาม
 function displayQuestion() {
@@ -27,27 +106,13 @@ function displayQuestion() {
     nextButton.classList.add('hidden');
     optionsContainer.innerHTML = '';
 
-    // กรองคำถามตามระดับความยากที่เลือก
-    const filteredQuestions = questions.filter(q => q.difficulty === selectedDifficulty);
-
-    // หากไม่มีคำถามในระดับที่เลือก
-    if (filteredQuestions.length === 0) {
-        questionText.textContent = "ไม่มีคำถามสำหรับระดับนี้ กรุณาเลือกระดับอื่น หรือเกมจบแล้ว!";
-        optionsContainer.innerHTML = '';
-        nextButton.classList.add('hidden');
-        stopTimer(); // หยุดจับเวลา
+    // หากไม่มีคำถามในชุดที่ถูกกรอง หรือคำถามหมด
+    if (currentQuestionSet.length === 0 || currentQuestionIndex >= currentQuestionSet.length) {
+        endGame();
         return;
     }
 
-    // ตรวจสอบว่าคำถามหมดหรือไม่
-    if (currentQuestionIndex >= filteredQuestions.length) {
-        endGame(); // เรียกฟังก์ชันจบเกม
-        return;
-    }
-
-    // สุ่มลำดับคำถามที่ถูกกรองแล้ว (แต่ใช้ currentQuestionIndex เพื่อไม่ให้ซ้ำ)
-    // หรือถ้าอยากสุ่มทุกครั้งที่โหลดคำถามใหม่: shuffleArray(filteredQuestions);
-    const currentQuestion = filteredQuestions[currentQuestionIndex];
+    const currentQuestion = currentQuestionSet[currentQuestionIndex];
 
     let questionContent;
     if (currentLanguage === 'en') {
@@ -58,7 +123,7 @@ function displayQuestion() {
 
     questionText.textContent = questionContent;
 
-    const optionsContent = shuffleArray([...currentQuestion.options_th]);
+    const optionsContent = shuffleArray([...currentQuestion.options_th]); // ตัวเลือกเป็นภาษาไทยเสมอ
 
     optionsContent.forEach(option => {
         const button = document.createElement('button');
@@ -72,23 +137,21 @@ function displayQuestion() {
         button.disabled = false;
     });
 
-    // เริ่มจับเวลาสำหรับคำถามใหม่
-    startTimer();
+    startTimer(); // เริ่มจับเวลาสำหรับคำถามใหม่
 }
 
 // ฟังก์ชันสำหรับตรวจสอบคำตอบ
 function checkAnswer(selectedOption) {
     stopTimer(); // หยุดเวลาทันทีที่ตอบ
 
-    const filteredQuestions = questions.filter(q => q.difficulty === selectedDifficulty);
-    const currentQuestion = filteredQuestions[currentQuestionIndex]; // ไม่ต้องใช้ % เพราะเช็คที่ displayQuestion แล้ว
-
+    const currentQuestion = currentQuestionSet[currentQuestionIndex];
     const correctAnswer = currentQuestion.correct_th;
 
+    // ปิดใช้งานปุ่มตัวเลือกทั้งหมด
     document.querySelectorAll('.option-button').forEach(button => {
         button.disabled = true;
         if (button.textContent === correctAnswer) {
-            button.classList.add('correct');
+            button.classList.add('correct'); // ทำเครื่องหมายปุ่มที่ถูกต้อง
         }
     });
 
@@ -102,7 +165,7 @@ function checkAnswer(selectedOption) {
         wrongScore++;
         document.querySelectorAll('.option-button').forEach(button => {
             if (button.textContent === selectedOption) {
-                button.classList.add('wrong');
+                button.classList.add('wrong'); // ทำเครื่องหมายปุ่มที่ตอบผิด
             }
         });
     }
@@ -110,7 +173,11 @@ function checkAnswer(selectedOption) {
     nextButton.classList.remove('hidden'); // แสดงปุ่ม "คำถามถัดไป"
 }
 
-// ... (updateScores ฟังก์ชันเหมือนเดิม) ...
+// ฟังก์ชันสำหรับอัปเดตคะแนนบนหน้าจอเกม
+function updateScores() {
+    correctScoreSpan.textContent = correctScore;
+    wrongScoreSpan.textContent = wrongScore;
+}
 
 // ฟังก์ชันสำหรับไปคำถามถัดไป
 function nextQuestion() {
@@ -118,31 +185,7 @@ function nextQuestion() {
     displayQuestion(); // จะตรวจสอบการจบเกมใน displayQuestion
 }
 
-// ฟังก์ชันสำหรับเปลี่ยนภาษา (เหมือนเดิม)
-function changeLanguage(lang) {
-    currentLanguage = lang;
-    langEnButton.classList.remove('active');
-    langJpButton.classList.remove('active');
-    if (lang === 'en') {
-        langEnButton.classList.add('active');
-    } else {
-        langJpButton.classList.add('active');
-    }
-    // รีเซ็ตเกมเมื่อเปลี่ยนภาษา
-    resetGame(); // เรียก resetGame แทน
-}
-
-// ฟังก์ชันสำหรับตั้งค่าระดับความยาก
-function setDifficulty(level) {
-    selectedDifficulty = level;
-    document.querySelectorAll('.difficulty-button').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(`diff-${level}`).classList.add('active');
-
-    // รีเซ็ตเกมเมื่อเปลี่ยนระดับความยาก
-    resetGame(); // เรียก resetGame แทน
-}
-
-// --- ส่วนที่ 4: ฟังก์ชันสำหรับจับเวลา ---
+// ฟังก์ชันสำหรับจับเวลา
 function startTimer() {
     timeLeft = TIME_LIMIT_PER_QUESTION;
     timeLeftSpan.textContent = timeLeft;
@@ -162,10 +205,10 @@ function startTimer() {
             document.querySelectorAll('.option-button').forEach(button => {
                 button.disabled = true;
             });
-            // แสดงคำตอบที่ถูกต้อง (ถ้ามี)
-            const filteredQuestions = questions.filter(q => q.difficulty === selectedDifficulty);
-            if (filteredQuestions[currentQuestionIndex]) {
-                const correctAnswer = filteredQuestions[currentQuestionIndex].correct_th;
+            // แสดงคำตอบที่ถูกต้อง
+            const currentQuestion = currentQuestionSet[currentQuestionIndex];
+            if (currentQuestion) { // ตรวจสอบว่ามีคำถามปัจจุบัน
+                const correctAnswer = currentQuestion.correct_th;
                 document.querySelectorAll('.option-button').forEach(button => {
                     if (button.textContent === correctAnswer) {
                         button.classList.add('correct');
@@ -174,55 +217,74 @@ function startTimer() {
             }
             nextButton.classList.remove('hidden'); // แสดงปุ่ม "คำถามถัดไป"
         }
-    }, 1000); // อัปเดตทุก 1 วินาที (1000 มิลลิวินาที)
+    }, 1000); // อัปเดตทุก 1 วินาที
 }
 
 function stopTimer() {
     clearInterval(timerInterval);
 }
 
-// --- ส่วนที่ 5: ฟังก์ชันควบคุมสถานะเกม ---
-
-function resetGame() {
-    currentQuestionIndex = 0;
-    correctScore = 0;
-    wrongScore = 0;
-    updateScores();
+// ฟังก์ชันจบเกมและแสดงผลลัพธ์
+function endGame() {
     stopTimer(); // หยุดเวลา
-    startScreen.classList.remove('hidden'); // แสดงหน้าจอเริ่มต้น
-    gameContainer.classList.add('hidden'); // ซ่อนส่วนเกม
-    feedbackText.textContent = ''; // ล้างข้อความ Feedback
-    feedbackText.className = '';
-    // ไม่ต้องเรียก displayQuestion ตรงนี้ เพราะจะถูกเรียกเมื่อกด Start Game
+    showScreen('result-screen'); // ไปยังหน้าสรุปผล
+
+    finalCorrectScoreSpan.textContent = correctScore;
+    finalWrongScoreSpan.textContent = wrongScore;
+
+    let message = "";
+    if (correctScore === currentQuestionSet.length) {
+        message = "ยอดเยี่ยม! คุณตอบถูกหมดทุกข้อ!";
+    } else if (correctScore > wrongScore) {
+        message = "เยี่ยมมาก! คุณทำได้ดีกว่าครึ่ง!";
+    } else if (correctScore === 0) {
+        message = "ไม่เป็นไรนะ ลองเล่นใหม่ดูอีกที!";
+    } else {
+        message = "คุณทำได้ดี! ลองพยายามอีกครั้งนะ!";
+    }
+    finalMessageText.textContent = message;
 }
 
-function startGame() {
-    startScreen.classList.add('hidden'); // ซ่อนหน้าจอเริ่มต้น
-    gameContainer.classList.remove('hidden'); // แสดงส่วนเกม
+// --- ส่วนที่ 6: การจัดการการตั้งค่า (ภาษาและความยาก) ---
+
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    langEnButton.classList.remove('active');
+    langJpButton.classList.remove('active');
+    if (lang === 'en') {
+        langEnButton.classList.add('active');
+    } else {
+        langJpButton.classList.add('active');
+    }
+}
+
+function setDifficulty(level) {
+    selectedDifficulty = level;
+    document.querySelectorAll('.difficulty-button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`diff-${level}`).classList.add('active');
+}
+
+// --- ส่วนที่ 7: การจัดการ Flow ของหน้าจอและปุ่ม ---
+
+function initializeGame() {
+    showScreen('start-screen'); // แสดงหน้าจอเริ่มต้นเมื่อโหลดเว็บ
+    // กำหนดค่าเริ่มต้นให้กับปุ่มที่ active (ถ้ายังไม่ได้กำหนดใน HTML)
+    langEnButton.classList.add('active');
+    diffEasyBtn.classList.add('active');
+}
+
+function startGameFlow() {
+    prepareGame(); // เตรียมชุดคำถามและรีเซ็ตคะแนน
+    showScreen('game-screen'); // แสดงหน้าจอเกม
     displayQuestion(); // เริ่มแสดงคำถามแรก
 }
 
-function endGame() {
-    stopTimer(); // หยุดเวลาเมื่อเกมจบ
-    questionText.textContent = `จบเกมในระดับ ${selectedDifficulty} แล้ว!`;
-    optionsContainer.innerHTML = '';
-    feedbackText.textContent = `คะแนนของคุณ: ถูก ${correctScore} ผิด ${wrongScore}`;
-    feedbackText.classList.remove('correct-feedback', 'wrong-feedback'); // ล้างสี
-    feedbackText.classList.add('normal-feedback'); // หรือไม่มีก็ได้
-    nextButton.classList.add('hidden'); // ซ่อนปุ่มถัดไป
-    
-    // เพิ่มปุ่มเล่นใหม่ หรือกลับหน้าจอเริ่มต้น
-    const playAgainButton = document.createElement('button');
-    playAgainButton.textContent = "เล่นใหม่";
-    playAgainButton.classList.add('option-button'); // ใช้สไตล์เดียวกัน
-    playAgainButton.style.marginTop = '20px';
-    playAgainButton.addEventListener('click', resetGame);
-    optionsContainer.appendChild(playAgainButton);
+function playAgainFlow() {
+    initializeGame(); // กลับไปหน้าจอเริ่มต้น
 }
 
 
-// --- ส่วนที่ 6: Event Listeners (การดักจับเหตุการณ์) ---
-startGameButton.addEventListener('click', startGame);
+// --- ส่วนที่ 8: Event Listeners (การดักจับเหตุการณ์) ---
 langEnButton.addEventListener('click', () => changeLanguage('en'));
 langJpButton.addEventListener('click', () => changeLanguage('jp'));
 
@@ -230,10 +292,10 @@ diffEasyBtn.addEventListener('click', () => setDifficulty('easy'));
 diffMediumBtn.addEventListener('click', () => setDifficulty('medium'));
 diffHardBtn.addEventListener('click', () => setDifficulty('hard'));
 
-// Event Listener สำหรับปุ่ม "เริ่มเกม"
-startGameButton.addEventListener('click', startGame);
+startGameButton.addEventListener('click', startGameFlow);
+nextButton.addEventListener('click', nextQuestion);
+playAgainButton.addEventListener('click', playAgainFlow);
 
-// --- ส่วนที่ 7: เริ่มต้นเกมเมื่อโหลดหน้าเว็บ ---
-document.addEventListener('DOMContentLoaded', () => {
-    resetGame(); // เริ่มต้นด้วยการแสดงหน้าจอเริ่มต้น
-});
+
+// --- ส่วนที่ 9: เริ่มต้นเกมเมื่อโหลดหน้าเว็บ ---
+document.addEventListener('DOMContentLoaded', initializeGame);
