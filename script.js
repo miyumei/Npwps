@@ -6,7 +6,8 @@ const questions = [
     { en: "Goodbye", jp: "さようなら", th: "ลาก่อน", options_th: ["สวัสดี", "ลาก่อน", "ขอโทษนะครับ/คะ", "ไม่"], correct_th: "ลาก่อน", difficulty: "easy" },
     { en: "Water", jp: "水", th: "น้ำ", options_th: ["อาหาร", "น้ำ", "ไฟ", "อากาศ"], correct_th: "น้ำ", difficulty: "easy" },
     { en: "Cat", jp: "猫 (ねこ)", th: "แมว", options_th: ["สุนัข", "แมว", "นก", "ปลา"], correct_th: "แมว", difficulty: "easy" },
-   { en: "Dog", jp: "犬 (いぬ)", th: "สุนัข", options_th: ["สุนัข", "แมว", "กระต่าย", "ปลา"], correct_th: "สุนัข", difficulty: "easy" },
+    // **คำถาม Easy เพิ่มเติม**
+    { en: "Dog", jp: "犬 (いぬ)", th: "สุนัข", options_th: ["สุนัข", "แมว", "กระต่าย", "ปลา"], correct_th: "สุนัข", difficulty: "easy" },
     { en: "Book", jp: "本 (ほん)", th: "หนังสือ", options_th: ["ปากกา", "หนังสือ", "ดินสอ", "กระดาษ"], correct_th: "หนังสือ", difficulty: "easy" },
     { en: "Car", jp: "車 (くるま)", th: "รถยนต์", options_th: ["จักรยาน", "เครื่องบิน", "เรือ", "รถยนต์"], correct_th: "รถยนต์", difficulty: "easy" },
     { en: "House", jp: "家 (いえ)", th: "บ้าน", options_th: ["โรงเรียน", "โรงพยาบาล", "บ้าน", "ร้านค้า"], correct_th: "บ้าน", difficulty: "easy" },
@@ -16,13 +17,14 @@ const questions = [
     { en: "Please", jp: "お願いします (おねがいします)", th: "โปรด", options_th: ["ขอบคุณ", "ขอโทษ", "โปรด", "ลาก่อน"], correct_th: "โปรด", difficulty: "easy" },
     { en: "Excuse me / Sorry", jp: "すみません", th: "ขอโทษครับ/ค่ะ", options_th: ["ขอบคุณครับ/ค่ะ", "สวัสดีครับ/ค่ะ", "ขอโทษครับ/ค่ะ", "ไม่เป็นไรครับ/ค่ะ"], correct_th: "ขอโทษครับ/ค่ะ", difficulty: "easy" },
     { en: "Morning", jp: "朝 (あさ)", th: "ตอนเช้า", options_th: ["ตอนบ่าย", "ตอนกลางคืน", "ตอนเช้า", "ตอนเย็น"], correct_th: "ตอนเช้า", difficulty: "easy" },
-    
+
     // --- คำถามระดับปานกลาง (Medium) ---
     { en: "Elephant", jp: "象 (ぞう)", th: "ช้าง", options_th: ["สุนัข", "แมว", "ช้าง", "นก"], correct_th: "ช้าง", difficulty: "medium" },
     { en: "Beautiful", jp: "美しい (うつくしい)", th: "สวยงาม", options_th: ["น่าเกลียด", "รวดเร็ว", "สวยงาม", "ใหญ่"], correct_th: "สวยงาม", difficulty: "medium" },
     { en: "Library", jp: "図書館 (としょかん)", th: "ห้องสมุด", options_th: ["โรงเรียน", "บ้าน", "ร้านค้า", "ห้องสมุด"], correct_th: "ห้องสมุด", difficulty: "medium" },
     { en: "Hospital", jp: "病院 (びょういん)", th: "โรงพยาบาล", options_th: ["โรงเรียน", "ธนาคาร", "โรงพยาบาล", "ร้านอาหาร"], correct_th: "โรงพยาบาล", difficulty: "medium" },
     { en: "To eat", jp: "食べる (たべる)", th: "กิน", options_th: ["ดื่ม", "วิ่ง", "นอน", "กิน"], correct_th: "กิน", difficulty: "medium" },
+    // **คำถาม Medium เพิ่มเติม**
     { en: "Train Station", jp: "駅 (えき)", th: "สถานีรถไฟ", options_th: ["สนามบิน", "ท่าเรือ", "สถานีรถไฟ", "ป้ายรถเมล์"], correct_th: "สถานีรถไฟ", difficulty: "medium" },
     { en: "Teacher", jp: "先生 (せんせい)", th: "ครู", options_th: ["นักเรียน", "แพทย์", "วิศวกร", "ครู"], correct_th: "ครู", difficulty: "medium" },
     { en: "Family", jp: "家族 (かぞく)", th: "ครอบครัว", options_th: ["เพื่อน", "เพื่อนร่วมงาน", "ครอบครัว", "คนแปลกหน้า"], correct_th: "ครอบครัว", difficulty: "medium" },
@@ -33,14 +35,14 @@ const questions = [
     { en: "Delicious", jp: "美味しい (おいしい)", th: "อร่อย", options_th: ["ไม่อร่อย", "สวย", "สะอาด", "อร่อย"], correct_th: "อร่อย", difficulty: "medium" },
     { en: "Price", jp: "値段 (ねだん)", th: "ราคา", options_th: ["คุณภาพ", "ขนาด", "ราคา", "จำนวน"], correct_th: "ราคา", difficulty: "medium" },
     { en: "Holiday / Day off", jp: "休み (やすみ)", th: "วันหยุด", options_th: ["วันทำงาน", "วันหยุด", "เวลาว่าง", "วันลา"], correct_th: "วันหยุด", difficulty: "medium" },
-    
 
     // --- คำถามระดับยาก (Hard) ---
     { en: "University", jp: "大学 (だいがく)", th: "มหาวิทยาลัย", options_th: ["โรงเรียน", "บ้าน", "ร้านค้า", "มหาวิทยาลัย"], correct_th: "มหาวิทยาลัย", difficulty: "hard" },
     { en: "Transportation", jp: "交通機関 (こうつうきかん)", th: "การขนส่ง", options_th: ["การสื่อสาร", "การเดินทาง", "การขนส่ง", "การเกษตร"], correct_th: "การขนส่ง", difficulty: "hard" },
     { en: "Approximately", jp: "およそ", th: "ประมาณ", options_th: ["แน่นอน", "อย่างแม่นยำ", "ประมาณ", "ทันที"], correct_th: "ประมาณ", difficulty: "hard" },
     { en: "Independence", jp: "独立 (どくりつ)", th: "อิสรภาพ", options_th: ["ความร่วมมือ", "ความเป็นทาส", "อิสรภาพ", "ความขัดแย้ง"], correct_th: "อิสรภาพ", difficulty: "hard" },
-    { en: "Responsibility", jp: "責任 (せきにん)", th: "ความรับผิดชอบ", options_th: ["ความสุข", "ความประมาท", "ความรับผิดชอบ", "ความกล้าหาญ"], correct_th: "ความรับผิดชอบ", difficulty: "hard" }
+    { en: "Responsibility", jp: "責任 (せきにん)", th: "ความรับผิดชอบ", options_th: ["ความสุข", "ความประมาท", "ความรับผิดชอบ", "ความกล้าหาญ"], correct_th: "ความรับผิดชอบ", difficulty: "hard" },
+    // **คำถาม Hard เพิ่มเติม**
     { en: "International", jp: "国際的な (こくさいてきな)", th: "ระหว่างประเทศ", options_th: ["ในประเทศ", "ท้องถิ่น", "ส่วนตัว", "ระหว่างประเทศ"], correct_th: "ระหว่างประเทศ", difficulty: "hard" },
     { en: "Environment", jp: "環境 (かんきょう)", th: "สิ่งแวดล้อม", options_th: ["เศรษฐกิจ", "สังคม", "การเมือง", "สิ่งแวดล้อม"], correct_th: "สิ่งแวดล้อม", difficulty: "hard" },
     { en: "Communication", jp: "コミュニケーション", th: "การสื่อสาร", options_th: ["การทำงาน", "การเรียนรู้", "การสื่อสาร", "การตัดสินใจ"], correct_th: "การสื่อสาร", difficulty: "hard" },
