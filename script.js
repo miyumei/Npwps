@@ -222,7 +222,7 @@ function endGame() {
 
 
 // --- ส่วนที่ 6: Event Listeners (การดักจับเหตุการณ์) ---
-nextButton.addEventListener('click', nextQuestion);
+startGameButton.addEventListener('click', startGame);
 langEnButton.addEventListener('click', () => changeLanguage('en'));
 langJpButton.addEventListener('click', () => changeLanguage('jp'));
 
