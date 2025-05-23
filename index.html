@@ -3,59 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เกมภาษาอังกฤษ-ญี่ปุ่น</title>
+    <title>เกมเรียนรู้ภาษา</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>เกมเรียนรู้ภาษา: อังกฤษ ↔ ญี่ปุ่น (คำตอบไทย)</h1>
-        <div class="language-selector">
-            <button id="lang-en" class="active">คำถามภาษาอังกฤษ</button>
-            <button id="lang-jp">คำถามภาษาญี่ปุ่น</button>
-        </div>
-    </header>
-
     <main>
-        <section id="difficulty-selector">
-            <h2>เลือกระดับความยาก</h2>
-            <div class="difficulty-buttons">
-                <button id="diff-easy" class="difficulty-button active">ง่าย</button>
-                <button id="diff-medium" class="difficulty-button">ปานกลาง</button>
-                <button id="diff-hard" class="difficulty-button">ยาก</button>
+        <section id="start-screen" class="screen">
+            <h1>เกมเรียนรู้ภาษา: อังกฤษ ↔ ญี่ปุ่น (คำตอบไทย)</h1>
+
+            <div class="setting-group">
+                <h2>1. เลือกระดับภาษาคำถาม</h2>
+                <div class="language-selector">
+                    <button id="lang-en" class="active">คำถามภาษาอังกฤษ</button>
+                    <button id="lang-jp">คำถามภาษาญี่ปุ่น</button>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <h2>2. เลือกระดับความยาก</h2>
+                <div class="difficulty-buttons">
+                    <button id="diff-easy" class="difficulty-button active">ง่าย</button>
+                    <button id="diff-medium" class="difficulty-button">ปานกลาง</button>
+                    <button id="diff-hard" class="difficulty-button">ยาก</button>
+                </div>
+            </div>
+
+            <button id="start-game-button" class="action-button">เริ่มเกม!</button>
+        </section>
+
+        <section id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <p id="timer-text">เวลา: <span id="time-left"></span> วินาที</p>
+                <div class="score-display">
+                    <p>ถูกต้อง: <span id="correct-score">0</span></p>
+                    <p>ผิด: <span id="wrong-score">0</span></p>
+                </div>
+            </div>
+
+            <div class="question-area">
+                <p id="question-text">คำถามจะปรากฏที่นี่</p>
+                <div id="options-container">
+                    </div>
+                <p id="feedback-text"></p>
+                <button id="next-button" class="hidden">คำถามถัดไป</button>
             </div>
         </section>
 
-        <section id="start-screen">
-            <h2>พร้อมที่จะเริ่มเกมไหม?</h2>
-            <button id="start-game-button">เริ่มเกม!</button>
+        <section id="result-screen" class="screen hidden">
+            <h2>ผลสรุปเกม</h2>
+            <p>คุณเล่นได้: <span id="final-correct-score">0</span> ข้อ</p>
+            <p>คุณตอบผิด: <span id="final-wrong-score">0</span> ข้อ</p>
+            <p class="final-message"></p>
+            <button id="play-again-button" class="action-button">เล่นอีกครั้ง</button>
         </section>
-
-        <section id="game-container" class="hidden">
-            <section id="game-area">
-                <h2>เกมทายคำศัพท์</h2>
-                <p id="timer-text">เวลา: <span id="time-left"></span> วินาที</p> <p id="question-text">คำถามจะปรากฏที่นี่</p>
-                <div id="options-container">
-                    <button class="option-button">ตัวเลือก 1</button>
-                    <button class="option-button">ตัวเลือก 2</button>
-                    <button class="option-button">ตัวเลือก 3</button>
-                    <button class="option-button">ตัวเลือก 4</button>
-                </div>
-                <button id="next-button" class="hidden">คำถามถัดไป</button>
-                <p id="feedback-text"></p>
-            </section>
-
-            <section id="score-area">
-                <h2>คะแนน</h2>
-                <p>ถูกต้อง: <span id="correct-score">0</span></p>
-                <p>ผิด: <span id="wrong-score">0</span></p>
-            </section>
-        </section>
-        </main>
+    </main>
 
     <footer>
-        <p>&copy; 2025 เกมภาษาอังกฤษ-ญี่ปุ่น โดย [ชื่อของคุณ]</p>
+        <p>&copy; 2025 เกมเรียนรู้ภาษา โดย [ชื่อของคุณ]</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
-        </html>
+                </html>
