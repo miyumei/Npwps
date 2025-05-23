@@ -1,61 +1,313 @@
-/* เพิ่ม CSS สำหรับหน้าจอเริ่มต้นและซ่อนส่วนเกม */
-#start-screen {
-    text-align: center;
-    padding: 50px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* เพิ่มระยะห่างด้านล่าง */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e0f2f7; /* Light blue background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
-#start-game-button {
-    background-color: #27ae60; /* สีเขียวสดใส */
+main {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 700px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.screen {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.screen h1 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+}
+
+.setting-group {
+    margin-bottom: 30px;
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.setting-group h2 {
+    color: #34495e;
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.language-selector button,
+.difficulty-buttons button {
+    background-color: #95a5a6; /* Grey */
     color: #fff;
     border: none;
-    padding: 15px 30px;
+    padding: 10px 20px;
+    margin: 0 8px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.language-selector button:hover,
+.difficulty-buttons button:hover {
+    background-color: #7f8c8d;
+}
+
+.language-selector button.active,
+.difficulty-buttons button.active {
+    background-color: #1abc9c; /* Teal for active */
+    font-weight: bold;
+}
+
+.action-button {
+    background-color: #3498db; /* Blue */
+    color: #fff;
+    border: none;
+    padding: 15px 35px;
     border-radius: 8px;
-    font-size: 1.5em;
+    font-size: 1.6em;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.1s ease;
     margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#start-game-button:hover {
-    background-color: #229954;
+.action-button:hover {
+    background-color: #2980b9;
     transform: translateY(-2px);
 }
 
-/* เพิ่มส่วนเวลา */
+/* Game Screen Styles */
+#game-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
 #timer-text {
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: bold;
-    color: #e74c3c; /* สีแดงสำหรับเวลา */
+    color: #e74c3c; /* Red for timer */
+}
+
+.score-display p {
+    font-size: 1.2em;
+    margin: 0 0 5px 0;
+    color: #2c3e50;
+}
+
+.score-display span {
+    font-weight: bold;
+    color: #27ae60;
+}
+
+.question-area {
+    width: 100%;
+}
+
+#question-text {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #2980b9;
+    min-height: 80px; /* เพื่อป้องกันการกระโดดของ Element */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    word-wrap: break-word; /* ให้ข้อความยาวๆ ขึ้นบรรทัดใหม่ */
+    overflow-wrap: break-word;
+}
+
+#options-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.option-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 18px 25px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.option-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.option-button:active {
+    transform: translateY(0);
+}
+
+.option-button.correct {
+    background-color: #27ae60; /* Green */
+}
+
+.option-button.wrong {
+    background-color: #e74c3c; /* Red */
+}
+
+#feedback-text {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 15px;
+    min-height: 30px;
+}
+
+#feedback-text.correct-feedback {
+    color: #27ae60;
+}
+
+#feedback-text.wrong-feedback {
+    color: #e74c3c;
+}
+
+#next-button {
+    background-color: #f39c12; /* Orange */
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 7px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+#next-button:hover {
+    background-color: #e67e22;
+}
+
+/* Result Screen Styles */
+#result-screen h2 {
+    color: #2c3e50;
+    font-size: 2em;
     margin-bottom: 20px;
 }
 
-/* คลาส hidden สำหรับซ่อน Element */
-.hidden {
-    display: none !important; /* ใช้ !important เพื่อให้ override CSS อื่นๆ ได้ */
+#result-screen p {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+#final-correct-score, #final-wrong-score {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+#final-correct-score {
+    color: #27ae60;
+}
+
+#final-wrong-score {
+    color: #e74c3c;
+}
+
+.final-message {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-top: 25px;
+    color: #333;
+}
+
+#play-again-button {
+    background-color: #3498db; /* Blue */
+    margin-top: 30px;
 }
 
 
-/* ... โค้ด CSS อื่นๆ ของคุณเหมือนเดิม ... */
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
 
-/* เพิ่ม responsive ให้กับ main เพื่อรองรับ start-screen และ game-container */
+/* Responsive Design */
 @media (max-width: 768px) {
     main {
+        padding: 20px;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .language-selector button,
+    .difficulty-buttons button {
+        display: block;
+        width: calc(100% - 16px); /* Full width minus margin */
+        margin: 8px 0;
+    }
+
+    .action-button {
+        padding: 12px 25px;
+        font-size: 1.3em;
+    }
+
+    #question-text {
+        font-size: 1.8em;
+        min-height: 60px;
+    }
+
+    .game-header {
         flex-direction: column;
-        padding: 15px;
+        align-items: flex-start;
+        gap: 10px;
     }
-    section {
-        margin-bottom: 20px;
+
+    #timer-text {
+        font-size: 1.5em;
     }
+
+    .score-display {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .score-display p {
+        font-size: 1em;
+    }
+
     #options-container {
         grid-template-columns: 1fr;
     }
-    .difficulty-buttons button { /* ทำให้ปุ่มยากง่ายอยู่คนละบรรทัดบนมือถือ */
-        display: block;
-        width: 100%;
-        margin-bottom: 10px;
+
+    #result-screen h2 {
+        font-size: 1.8em;
     }
-}
+
+    #result-screen p {
+        font-size: 1.2em;
+    }
+    }
