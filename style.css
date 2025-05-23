@@ -1,31 +1,47 @@
-/* เพิ่ม CSS สำหรับส่วนเลือกระดับความยาก */
-#difficulty-selector {
+/* เพิ่ม CSS สำหรับหน้าจอเริ่มต้นและซ่อนส่วนเกม */
+#start-screen {
     text-align: center;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* เพิ่มระยะห่างด้านล่าง */
+}
+
+#start-game-button {
+    background-color: #27ae60; /* สีเขียวสดใส */
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-top: 20px;
+}
+
+#start-game-button:hover {
+    background-color: #229954;
+    transform: translateY(-2px);
+}
+
+/* เพิ่มส่วนเวลา */
+#timer-text {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #e74c3c; /* สีแดงสำหรับเวลา */
     margin-bottom: 20px;
 }
 
-.difficulty-buttons button {
-    background-color: #5d6d7e; /* สีเทาเข้ม */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin: 0 5px;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* คลาส hidden สำหรับซ่อน Element */
+.hidden {
+    display: none !important; /* ใช้ !important เพื่อให้ override CSS อื่นๆ ได้ */
 }
 
-.difficulty-buttons button:hover {
-    background-color: #4a5a6a;
-}
 
-.difficulty-buttons button.active {
-    background-color: #2ecc71; /* สีเขียวสำหรับปุ่มที่เลือก */
-    font-weight: bold;
-}
+/* ... โค้ด CSS อื่นๆ ของคุณเหมือนเดิม ... */
 
-/* เพิ่ม responsive ให้กับ main เพื่อรองรับ difficulty-selector */
+/* เพิ่ม responsive ให้กับ main เพื่อรองรับ start-screen และ game-container */
 @media (max-width: 768px) {
     main {
         flex-direction: column;
@@ -42,4 +58,4 @@
         width: 100%;
         margin-bottom: 10px;
     }
-    }
+}
