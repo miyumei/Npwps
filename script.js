@@ -3,72 +3,84 @@ const questions = [
     {
         en: "Hello",
         jp: "こんにちは",
-        th: "สวัสดี", // เพิ่มคำแปลภาษาไทยของคำศัพท์
-        options_th: ["ลาก่อน", "ขอบคุณ", "สวัสดี", "ขอโทษ"], // ตัวเลือกคำตอบเป็นภาษาไทย
-        correct_th: "สวัสดี" // คำตอบที่ถูกต้องเป็นภาษาไทย
+        th: "สวัสดี",
+        options_th: ["ลาก่อน", "ขอบคุณ", "สวัสดี", "ขอโทษ"],
+        correct_th: "สวัสดี",
+        difficulty: "easy" // ระดับความยาก
     },
     {
         en: "Thank you",
         jp: "ありがとう",
         th: "ขอบคุณ",
         options_th: ["ขอโทษ", "โปรด", "ขอบคุณ", "ใช่"],
-        correct_th: "ขอบคุณ"
+        correct_th: "ขอบคุณ",
+        difficulty: "easy"
     },
     {
         en: "Goodbye",
         jp: "さようなら",
         th: "ลาก่อน",
         options_th: ["สวัสดี", "ลาก่อน", "ขอโทษนะครับ/คะ", "ไม่"],
-        correct_th: "ลาก่อน"
-    },
-    {
-        en: "Yes",
-        jp: "はい",
-        th: "ใช่",
-        options_th: ["ไม่", "อาจจะ", "ใช่", "โปรด"],
-        correct_th: "ใช่"
-    },
-    {
-        en: "No",
-        jp: "いいえ",
-        th: "ไม่",
-        options_th: ["ใช่", "ไม่", "ขอโทษ", "สวัสดี"],
-        correct_th: "ไม่"
-    },
-    {
-        en: "Please",
-        jp: "お願いします",
-        th: "โปรด",
-        options_th: ["ขอบคุณ", "ขอโทษ", "ใช่", "โปรด"],
-        correct_th: "โปรด"
-    },
-    {
-        en: "Excuse me",
-        jp: "すみません",
-        th: "ขอโทษนะครับ/คะ",
-        options_th: ["สวัสดี", "ลาก่อน", "ขอบคุณ", "ขอโทษนะครับ/คะ"],
-        correct_th: "ขอโทษนะครับ/คะ"
-    },
-    {
-        en: "Sorry",
-        jp: "ごめんなさい",
-        th: "ขอโทษ",
-        options_th: ["ขอบคุณ", "สวัสดี", "ขอโทษ", "ใช่"],
-        correct_th: "ขอโทษ"
+        correct_th: "ลาก่อน",
+        difficulty: "easy"
     },
     {
         en: "Water",
         jp: "水",
         th: "น้ำ",
         options_th: ["อาหาร", "น้ำ", "ไฟ", "อากาศ"],
-        correct_th: "น้ำ"
+        correct_th: "น้ำ",
+        difficulty: "easy"
+    },
+    // --- คำถามระดับปานกลาง (Medium) ---
+    {
+        en: "Elephant",
+        jp: "象 (ぞう)",
+        th: "ช้าง",
+        options_th: ["สุนัข", "แมว", "ช้าง", "นก"],
+        correct_th: "ช้าง",
+        difficulty: "medium"
     },
     {
-        en: "Food",
-        jp: "食べ物",
-        th: "อาหาร",
-        options_th: ["น้ำ", "อาหาร", "บ้าน", "รถ"],
-        correct_th: "อาหาร"
+        en: "Beautiful",
+        jp: "美しい (うつくしい)",
+        th: "สวยงาม",
+        options_th: ["น่าเกลียด", "รวดเร็ว", "สวยงาม", "ใหญ่"],
+        correct_th: "สวยงาม",
+        difficulty: "medium"
+    },
+    {
+        en: "Library",
+        jp: "図書館 (としょかん)",
+        th: "ห้องสมุด",
+        options_th: ["โรงเรียน", "บ้าน", "ร้านค้า", "ห้องสมุด"],
+        correct_th: "ห้องสมุด",
+        difficulty: "medium"
+    },
+    // --- คำถามระดับยาก (Hard) ---
+    {
+        en: "University",
+        jp: "大学 (だいがく)",
+        th: "มหาวิทยาลัย",
+        options_th: ["โรงเรียน", "บ้าน", "ร้านค้า", "มหาวิทยาลัย"],
+        correct_th: "มหาวิทยาลัย",
+        difficulty: "hard"
+    },
+    {
+        en: "Transportation",
+        jp: "交通機関 (こうつうきかん)",
+        th: "การขนส่ง",
+        options_th: ["การสื่อสาร", "การเดินทาง", "การขนส่ง", "การเกษตร"],
+        correct_th: "การขนส่ง",
+        difficulty: "hard"
+    },
+    {
+        en: "Approximately",
+        jp: "およそ",
+        th: "ประมาณ",
+        options_th: ["แน่นอน", "อย่างแม่นยำ", "ประมาณ", "ทันที"],
+        correct_th: "ประมาณ",
+        difficulty: "hard"
     }
 ];
 
@@ -76,6 +88,7 @@ let currentQuestionIndex = 0;
 let correctScore = 0;
 let wrongScore = 0;
 let currentLanguage = 'en'; // 'en' สำหรับคำถามภาษาอังกฤษ, 'jp' สำหรับคำถามภาษาญี่ปุ่น
+let selectedDifficulty = 'easy'; // ระดับความยากเริ่มต้น
 
 // --- ส่วนที่ 2: อ้างอิง Element ใน HTML ---
 const questionText = document.getElementById('question-text');
@@ -87,69 +100,80 @@ const wrongScoreSpan = document.getElementById('wrong-score');
 const langEnButton = document.getElementById('lang-en');
 const langJpButton = document.getElementById('lang-jp');
 
+// อ้างอิงปุ่มเลือกระดับความยาก
+const diffEasyBtn = document.getElementById('diff-easy');
+const diffMediumBtn = document.getElementById('diff-medium');
+const diffHardBtn = document.getElementById('diff-hard');
+
 // --- ส่วนที่ 3: ฟังก์ชันหลักของเกม ---
 
 // ฟังก์ชันสำหรับสุ่มลำดับ Element ใน Array
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // แลกเปลี่ยนตำแหน่ง
+        [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
 }
 
 // ฟังก์ชันสำหรับแสดงคำถาม
 function displayQuestion() {
-    feedbackText.textContent = ''; // ล้างข้อความ feedback
-    feedbackText.className = ''; // ล้าง class สี
-    nextButton.classList.add('hidden'); // ซ่อนปุ่ม "คำถามถัดไป"
+    feedbackText.textContent = '';
+    feedbackText.className = '';
+    nextButton.classList.add('hidden');
+    optionsContainer.innerHTML = ''; // ลบปุ่มตัวเลือกเดิมออกไปก่อน
 
-    // ลบปุ่มตัวเลือกเดิมออกไปก่อน
-    optionsContainer.innerHTML = '';
+    // กรองคำถามตามระดับความยากที่เลือก
+    const filteredQuestions = questions.filter(q => q.difficulty === selectedDifficulty);
 
-    // สุ่มลำดับคำถามเพื่อให้คำถามไม่ซ้ำกันในแต่ละรอบ
-    shuffleArray(questions);
+    // หากไม่มีคำถามในระดับที่เลือก หรือคำถามหมด
+    if (filteredQuestions.length === 0) {
+        questionText.textContent = "ไม่มีคำถามสำหรับระดับนี้ กรุณาเลือกระดับอื่น หรือเกมจบแล้ว!";
+        optionsContainer.innerHTML = '';
+        nextButton.classList.add('hidden');
+        return;
+    }
 
-    // แสดงคำถามและตัวเลือก
-    const currentQuestion = questions[currentQuestionIndex];
-    let questionContent; // เนื้อหาคำถาม (จะเป็นภาษาอังกฤษหรือญี่ปุ่น)
+    // สุ่มลำดับคำถามที่ถูกกรองแล้ว
+    shuffleArray(filteredQuestions);
+    // ตรวจสอบว่า currentQuestionIndex ไม่เกินจำนวนคำถามที่มี
+    const currentQuestion = filteredQuestions[currentQuestionIndex % filteredQuestions.length]; // ใช้ % เพื่อวนลูปคำถาม
+                                                                                              // ถ้าต้องการให้จบเมื่อคำถามหมด ไม่ต้องใช้ %
 
+    let questionContent;
     if (currentLanguage === 'en') {
-        questionContent = currentQuestion.en; // คำถามเป็นภาษาอังกฤษ
+        questionContent = currentQuestion.en;
     } else {
-        questionContent = currentQuestion.jp; // คำถามเป็นภาษาญี่ปุ่น
+        questionContent = currentQuestion.jp;
     }
 
     questionText.textContent = questionContent;
 
-    // ตัวเลือกคำตอบจะเป็นภาษาไทยเสมอ
-    const optionsContent = shuffleArray([...currentQuestion.options_th]);
+    const optionsContent = shuffleArray([...currentQuestion.options_th]); // ตัวเลือกเป็นภาษาไทยเสมอ
 
     optionsContent.forEach(option => {
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-button');
-        button.addEventListener('click', () => checkAnswer(option)); // เมื่อคลิกปุ่ม จะเรียก checkAnswer
+        button.addEventListener('click', () => checkAnswer(option));
         optionsContainer.appendChild(button);
     });
 
-    // เปิดใช้งานปุ่มตัวเลือกทั้งหมด
     document.querySelectorAll('.option-button').forEach(button => {
         button.disabled = false;
     });
 }
 
-// ฟังก์ชันสำหรับตรวจสอบคำตอบ
+// ฟังก์ชันสำหรับตรวจสอบคำตอบ (เหมือนเดิม)
 function checkAnswer(selectedOption) {
-    const currentQuestion = questions[currentQuestionIndex];
-    // คำตอบที่ถูกต้องจะเป็นภาษาไทยเสมอ
+    const filteredQuestions = questions.filter(q => q.difficulty === selectedDifficulty);
+    const currentQuestion = filteredQuestions[currentQuestionIndex % filteredQuestions.length]; // ใช้ % เพื่อวนลูป
     const correctAnswer = currentQuestion.correct_th;
 
-    // ปิดใช้งานปุ่มตัวเลือกทั้งหมดหลังจากที่ผู้ใช้เลือกแล้ว
     document.querySelectorAll('.option-button').forEach(button => {
         button.disabled = true;
         if (button.textContent === correctAnswer) {
-            button.classList.add('correct'); // ทำเครื่องหมายปุ่มที่ถูกต้องด้วยสีเขียว
+            button.classList.add('correct');
         }
     });
 
@@ -161,18 +185,17 @@ function checkAnswer(selectedOption) {
         feedbackText.textContent = 'ผิด! คำตอบที่ถูกต้องคือ: ' + correctAnswer;
         feedbackText.classList.add('wrong-feedback');
         wrongScore++;
-        // ทำเครื่องหมายปุ่มที่ผู้ใช้เลือกผิดด้วยสีแดง
         document.querySelectorAll('.option-button').forEach(button => {
             if (button.textContent === selectedOption) {
                 button.classList.add('wrong');
             }
         });
     }
-    updateScores(); // อัปเดตคะแนน
-    nextButton.classList.remove('hidden'); // แสดงปุ่ม "คำถามถัดไป"
+    updateScores();
+    nextButton.classList.remove('hidden');
 }
 
-// ฟังก์ชันสำหรับอัปเดตคะแนน
+// ฟังก์ชันสำหรับอัปเดตคะแนน (เหมือนเดิม)
 function updateScores() {
     correctScoreSpan.textContent = correctScore;
     wrongScoreSpan.textContent = wrongScore;
@@ -180,15 +203,25 @@ function updateScores() {
 
 // ฟังก์ชันสำหรับไปคำถามถัดไป
 function nextQuestion() {
-    // เลื่อนไปยังคำถามถัดไป หรือวนกลับไปคำถามแรกเมื่อถึงคำถามสุดท้าย
-    currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-    displayQuestion(); // แสดงคำถามใหม่
+    // เพิ่ม currentQuestionIndex
+    currentQuestionIndex++;
+    // หากต้องการให้เกมจบเมื่อคำถามในระดับหมด แทนที่จะวนลูป
+    const filteredQuestions = questions.filter(q => q.difficulty === selectedDifficulty);
+    if (currentQuestionIndex >= filteredQuestions.length) {
+        questionText.textContent = "จบเกมในระดับนี้แล้ว! คะแนนของคุณคือ...";
+        optionsContainer.innerHTML = '';
+        nextButton.classList.add('hidden');
+        feedbackText.textContent = '';
+        // อาจจะเพิ่มปุ่ม "เล่นใหม่" หรือ "เปลี่ยนระดับ" ตรงนี้
+        return;
+    }
+
+    displayQuestion(); // แสดงคำถามถัดไป
 }
 
-// ฟังก์ชันสำหรับเปลี่ยนภาษาของคำถาม
+// ฟังก์ชันสำหรับเปลี่ยนภาษา (เหมือนเดิม)
 function changeLanguage(lang) {
     currentLanguage = lang;
-    // อัปเดตสถานะปุ่มภาษา
     langEnButton.classList.remove('active');
     langJpButton.classList.remove('active');
     if (lang === 'en') {
@@ -204,13 +237,35 @@ function changeLanguage(lang) {
     displayQuestion();
 }
 
+// ฟังก์ชันสำหรับตั้งค่าระดับความยาก
+function setDifficulty(level) {
+    selectedDifficulty = level;
+    // อัปเดตสถานะปุ่ม active
+    document.querySelectorAll('.difficulty-button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`diff-${level}`).classList.add('active');
+
+    // รีเซ็ตเกมและแสดงคำถามใหม่ตามระดับความยากที่เลือก
+    currentQuestionIndex = 0;
+    correctScore = 0;
+    wrongScore = 0;
+    updateScores();
+    displayQuestion();
+}
+
 // --- ส่วนที่ 4: Event Listeners (การดักจับเหตุการณ์) ---
-nextButton.addEventListener('click', nextQuestion); // เมื่อคลิกปุ่ม "คำถามถัดไป"
-langEnButton.addEventListener('click', () => changeLanguage('en')); // เมื่อคลิกปุ่ม "คำถามภาษาอังกฤษ"
-langJpButton.addEventListener('click', () => changeLanguage('jp')); // เมื่อคลิกปุ่ม "คำถามภาษาญี่ปุ่น"
+nextButton.addEventListener('click', nextQuestion);
+langEnButton.addEventListener('click', () => changeLanguage('en'));
+langJpButton.addEventListener('click', () => changeLanguage('jp'));
+
+// Event Listeners สำหรับปุ่มเลือกระดับความยาก
+diffEasyBtn.addEventListener('click', () => setDifficulty('easy'));
+diffMediumBtn.addEventListener('click', () => setDifficulty('medium'));
+diffHardBtn.addEventListener('click', () => setDifficulty('hard'));
 
 // --- ส่วนที่ 5: เริ่มต้นเกมเมื่อโหลดหน้าเว็บ ---
 document.addEventListener('DOMContentLoaded', () => {
-    displayQuestion(); // แสดงคำถามแรก
-    updateScores(); // อัปเดตคะแนนเริ่มต้น
+    displayQuestion();
+    updateScores();
+    // ตั้งค่าปุ่มความยากเริ่มต้นให้เป็น active
+    document.getElementById('diff-easy').classList.add('active');
 });
