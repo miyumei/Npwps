@@ -25,25 +25,32 @@
             </div>
         </section>
 
-        <section id="game-area">
-            <h2>เกมทายคำศัพท์</h2>
-            <p id="question-text">คำถามจะปรากฏที่นี่</p>
-            <div id="options-container">
-                <button class="option-button">ตัวเลือก 1</button>
-                <button class="option-button">ตัวเลือก 2</button>
-                <button class="option-button">ตัวเลือก 3</button>
-                <button class="option-button">ตัวเลือก 4</button>
-            </div>
-            <button id="next-button" class="hidden">คำถามถัดไป</button>
-            <p id="feedback-text"></p>
+        <section id="start-screen">
+            <h2>พร้อมที่จะเริ่มเกมไหม?</h2>
+            <button id="start-game-button">เริ่มเกม!</button>
         </section>
 
-        <section id="score-area">
-            <h2>คะแนน</h2>
-            <p>ถูกต้อง: <span id="correct-score">0</span></p>
-            <p>ผิด: <span id="wrong-score">0</span></p>
+        <section id="game-container" class="hidden">
+            <section id="game-area">
+                <h2>เกมทายคำศัพท์</h2>
+                <p id="timer-text">เวลา: <span id="time-left"></span> วินาที</p> <p id="question-text">คำถามจะปรากฏที่นี่</p>
+                <div id="options-container">
+                    <button class="option-button">ตัวเลือก 1</button>
+                    <button class="option-button">ตัวเลือก 2</button>
+                    <button class="option-button">ตัวเลือก 3</button>
+                    <button class="option-button">ตัวเลือก 4</button>
+                </div>
+                <button id="next-button" class="hidden">คำถามถัดไป</button>
+                <p id="feedback-text"></p>
+            </section>
+
+            <section id="score-area">
+                <h2>คะแนน</h2>
+                <p>ถูกต้อง: <span id="correct-score">0</span></p>
+                <p>ผิด: <span id="wrong-score">0</span></p>
+            </section>
         </section>
-    </main>
+        </main>
 
     <footer>
         <p>&copy; 2025 เกมภาษาอังกฤษ-ญี่ปุ่น โดย [ชื่อของคุณ]</p>
@@ -51,4 +58,4 @@
 
     <script src="script.js"></script>
 </body>
-    </html>
+        </html>
